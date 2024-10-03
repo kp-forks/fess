@@ -310,6 +310,9 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
     /** The key of the configuration. e.g. 262144 */
     String HTTP_FILEUPLOAD_THRESHOLD_SIZE = "http.fileupload.threshold.size";
 
+    /** The key of the configuration. e.g. 10 */
+    String HTTP_FILEUPLOAD_MAX_FILE_COUNT = "http.fileupload.max.file.count";
+
     /** The key of the configuration. e.g. groovy */
     String CRAWLER_DEFAULT_SCRIPT = "crawler.default.script";
 
@@ -717,6 +720,9 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
 
     /** The key of the configuration. e.g. fess_log */
     String INDEX_LOG_INDEX = "index.log.index";
+
+    /** The key of the configuration. e.g.  */
+    String INDEX_DICTIONARY_PREFIX = "index.dictionary.prefix";
 
     /** The key of the configuration. e.g. lang,role,label,anchor,virtual_host */
     String INDEX_ADMIN_ARRAY_FIELDS = "index.admin.array.fields";
@@ -2644,6 +2650,21 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
     Integer getHttpFileuploadThresholdSizeAsInteger();
 
     /**
+     * Get the value for the key 'http.fileupload.max.file.count'. <br>
+     * The value is, e.g. 10 <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getHttpFileuploadMaxFileCount();
+
+    /**
+     * Get the value for the key 'http.fileupload.max.file.count' as {@link Integer}. <br>
+     * The value is, e.g. 10 <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     * @throws NumberFormatException When the property is not integer.
+     */
+    Integer getHttpFileuploadMaxFileCountAsInteger();
+
+    /**
      * Get the value for the key 'crawler.default.script'. <br>
      * The value is, e.g. groovy <br>
      * comment: common
@@ -4066,6 +4087,21 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
      * @return The value of found property. (NotNull: if not found, exception but basically no way)
      */
     String getIndexLogIndex();
+
+    /**
+     * Get the value for the key 'index.dictionary.prefix'. <br>
+     * The value is, e.g.  <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     */
+    String getIndexDictionaryPrefix();
+
+    /**
+     * Get the value for the key 'index.dictionary.prefix' as {@link Integer}. <br>
+     * The value is, e.g.  <br>
+     * @return The value of found property. (NotNull: if not found, exception but basically no way)
+     * @throws NumberFormatException When the property is not integer.
+     */
+    Integer getIndexDictionaryPrefixAsInteger();
 
     /**
      * Get the value for the key 'index.admin.array.fields'. <br>
@@ -8203,6 +8239,14 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
             return getAsInteger(FessConfig.HTTP_FILEUPLOAD_THRESHOLD_SIZE);
         }
 
+        public String getHttpFileuploadMaxFileCount() {
+            return get(FessConfig.HTTP_FILEUPLOAD_MAX_FILE_COUNT);
+        }
+
+        public Integer getHttpFileuploadMaxFileCountAsInteger() {
+            return getAsInteger(FessConfig.HTTP_FILEUPLOAD_MAX_FILE_COUNT);
+        }
+
         public String getCrawlerDefaultScript() {
             return get(FessConfig.CRAWLER_DEFAULT_SCRIPT);
         }
@@ -8981,6 +9025,14 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
 
         public String getIndexLogIndex() {
             return get(FessConfig.INDEX_LOG_INDEX);
+        }
+
+        public String getIndexDictionaryPrefix() {
+            return get(FessConfig.INDEX_DICTIONARY_PREFIX);
+        }
+
+        public Integer getIndexDictionaryPrefixAsInteger() {
+            return getAsInteger(FessConfig.INDEX_DICTIONARY_PREFIX);
         }
 
         public String getIndexAdminArrayFields() {
@@ -11040,6 +11092,7 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
             defaultMap.put(FessConfig.HTTP_PROXY_PASSWORD, "");
             defaultMap.put(FessConfig.HTTP_FILEUPLOAD_MAX_SIZE, "262144000");
             defaultMap.put(FessConfig.HTTP_FILEUPLOAD_THRESHOLD_SIZE, "262144");
+            defaultMap.put(FessConfig.HTTP_FILEUPLOAD_MAX_FILE_COUNT, "10");
             defaultMap.put(FessConfig.CRAWLER_DEFAULT_SCRIPT, "groovy");
             defaultMap.put(FessConfig.CRAWLER_HTTP_thread_pool_SIZE, "0");
             defaultMap.put(FessConfig.CRAWLER_DOCUMENT_MAX_SITE_LENGTH, "100");
@@ -11178,6 +11231,7 @@ public interface FessConfig extends FessEnv, org.codelibs.fess.mylasta.direction
             defaultMap.put(FessConfig.INDEX_CONFIG_INDEX, "fess_config");
             defaultMap.put(FessConfig.INDEX_USER_INDEX, "fess_user");
             defaultMap.put(FessConfig.INDEX_LOG_INDEX, "fess_log");
+            defaultMap.put(FessConfig.INDEX_DICTIONARY_PREFIX, "");
             defaultMap.put(FessConfig.INDEX_ADMIN_ARRAY_FIELDS, "lang,role,label,anchor,virtual_host");
             defaultMap.put(FessConfig.INDEX_ADMIN_DATE_FIELDS, "expires,created,timestamp,last_modified");
             defaultMap.put(FessConfig.INDEX_ADMIN_INTEGER_FIELDS, "");
